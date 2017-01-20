@@ -1,68 +1,48 @@
+/* This program compressees the string aaaccccbbbbffffssss to a3c3b4f4s4*/
+// Time complexity O(N)
+// Space complexity o(N)
 #include<stdio.h>
 #include<string.h>
 
-long unsigned int vector = 0x0;
-char* getunqchar(char a[]) {
-    char str[30],*f;
-    int i,j=0;
-    long unsigned int t, test = 0;
-    for (i = 0; i < strlen(a) - 1; i++) {
-        t = (long unsigned int)(a[i]) - 65;
-        test = (long unsigned int)(1UL << t);
-        vector = (vector ) | test;
 
-    }
-        printf("vec is %lx \n",vector);
+int main()
+{
+  int cnt=1,j=0,i=0;
+  char inp[100];
+  char out[100];
+  int cnter [100]; 
+  printf("Enter the string ");
+  fgets(inp,sizeof(inp),stdin);
 
-   for(i=0;vector!=0;i++,vector=vector>>1)
-   {
-     if(vector&0x1)
+  for(i=1;i<strlen(inp);i++)
+  {
+     if(inp[i]==inp[i-1])
      {
-      str[j]= (char)(65+i);
-      printf("%c",str[j]);
+        cnt++;
      }
+     else
+     {
 
+        out[j]=inp[i-1];
+        cnter[j]=cnt;
+        j=j+1;
+        cnt=1;
+     }
+       
+
+
+  }
+   if(i==j)
+   {
+      printf("inp %s",inp);
    }
-   f=str;
-   return f;
+   else
+   {
+     for(i=0;i<j;i++)
+      printf("%c%d",out[i],cnter[i]);
+ 
+   }
 
-}
-
-
-
-int main (){
-int i=0;
-char name[30],*temp;
-int cnt[52],t;
-
-memset(cnt,0,sizeof(cnt));
-printf("Enter the string name");
-fgets(name, sizeof(name), stdin);
-//gets(name);
-//printf("vec is %ld",(long unsigned int)1<<40);
-
-vector=(long int)0x0;
-temp = getunqchar(name);
-puts(temp);
 getchar();
 
-for(i=0;i<strlen(name)-1;i++)
-{
-  t = (int) (name[i]) -65;
-	printf("%d\t",t);
-  cnt[t]++;
-  
 }
-
-for(i=0;i<52;i++)
-{
-
-  if (cnt[i]!=0)
-   printf("%c %d",i+65,cnt[i]);  
-}
-
-
-
-
-}
-
